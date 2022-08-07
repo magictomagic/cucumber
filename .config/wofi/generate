@@ -1,0 +1,91 @@
+#!/bin/bash
+
+singletonize
+
+# Set Variable
+XDG_DATA_HOME="$HOME/.local/share"
+DESKTOP_SCRIPTS_LOCATION="$XDG_DATA_HOME/applications"
+
+generateScript(){
+  name=$1
+  cat << EOF > $DESKTOP_SCRIPTS_LOCATION/$name.desktop
+[Desktop Entry]
+Type=Application
+Name=${name}
+Exec=$WOFI_SCRIPTS/$1
+EOF
+}
+
+deleteScript(){
+  echo "$DESKTOP_SCRIPTS_LOCATION/$1.*"
+  rm -f "$DESKTOP_SCRIPTS_LOCATION/$1.*"
+}
+
+monitorMode(){
+  echo "Monitor Mode"
+}
+
+getScriptFiles(){
+  local scriptNamesFile;
+  scriptNamesFile=$(mktemp) || exit 1
+  local scriptFiles;
+  scriptFiles=$(find $WOFI_SCRIPTS -executable -type f)
+  for scriptFile in $scriptFiles
+  do
+    basename -- "$scriptFile" >> $scriptNamesFile
+  done
+  unset scriptFile
+  echo $scriptNamesFile
+}
+getDesktopFiles(){
+  local desktopNamesFile;
+  desktopNamesFile=$(mktemp) || exit 1
+  local desktopFiles;
+  desktopFiles=$(ls $DESKTOP_SCRIPTS_LOCATION)
+  for desktopFile in $desktopFiles
+  do
+    fileName=$(basename -- "$desktopFile")
+    echo "${fileName%.*}" >> $desktopNamesFile
+  done
+  unset desktopFile
+  unset fileName
+  echo $desktopNamesFile
+}
+instantMode(){
+  scriptNamesFile=$(getScriptFiles)
+  desktopNamesFile=$(getDesktopFiles)
+
+  log debug "script $(cat $scriptNamesFile)"
+  log debug "desktop $(cat $desktopNamesFile)"
+  filesToCreate=$(sort $scriptNamesFile $desktopNamesFile $desktopNamesFile | uniq -u)
+  filesToDelete=$(sort $desktopNamesFile $scriptNamesFile $scriptNamesFile | uniq -u)
+  trap "rm -f "$desktopNamesFile"" EXIT
+  trap "rm -f "$scriptNamesFile"" EXIT
+  echo $filesToCreate
+  echo $filesToDelete
+
+  for fileToDelete in $filesToDelete
+  do
+    deleteScript $filesToDelete
+  done
+
+  for fileToCreate in $filesToCreate
+  do
+    generateScript $fileToCreate
+  done
+
+}
+
+mode=${1:-instant}
+
+case $mode in
+  instant)
+    instantMode && wofi --show drun ;;
+  monitor)
+    monitorMode ;;
+  *)
+    echo "available modes are:"
+    echo "1) instant"
+    echo "2) monitor"
+  esac
+

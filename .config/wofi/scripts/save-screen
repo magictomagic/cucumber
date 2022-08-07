@@ -1,0 +1,3 @@
+#!/bin/bash
+grimshot --notify save screen
+

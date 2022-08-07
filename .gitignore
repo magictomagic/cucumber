@@ -1,0 +1,24 @@
+.bash_history
+.bash_logout
+.cache/
+.cargo/
+# .config
+Downloads/
+.gitignore.back
+.lesshst
+.local/
+.mozilla/
+Pictures/
+.pki/
+.profile
+.python_history
+.rustup/
+Software/
+Videos/
+
+.config/BraveSoftware/
+.config/log/
+.config/gtk-3.0/
+.config/procps/
+
+
