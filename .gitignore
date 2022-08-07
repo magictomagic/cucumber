@@ -2,7 +2,6 @@
 .bash_logout
 .cache/
 .cargo/
-# .config
 Downloads/
 .gitignore.back
 .lesshst
@@ -21,7 +20,7 @@ Videos/
 .config/gtk-3.0/
 .config/procps/
 .config/dconf/
-.config/pulse
+.config/pulse/cookie
 
 .gitconfig
 .ssh/
