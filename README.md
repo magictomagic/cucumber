@@ -1,8 +1,8 @@
 
 ## Route
-- [ X ] Extract/Share Linux-Desktop meta-data to cloud.
+- [x] Extract/Share Linux-Desktop meta-data to cloud.
 - [ ] Meta-data can regenerate Full-Functional Linux-Desktop in Fedora/Debian with a little command line.
-- [ ] 
+- [ ] Automate backup $HOME and dd disk
 
 ## Extract Packages
 ```shell
