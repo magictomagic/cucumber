@@ -21,4 +21,7 @@ Videos/
 .config/gtk-3.0/
 .config/procps/
 
+.gitconfig
+.ssh/
+
 
