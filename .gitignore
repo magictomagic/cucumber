@@ -20,6 +20,7 @@ Videos/
 .config/log/
 .config/gtk-3.0/
 .config/procps/
+.config/dconf/
 
 .gitconfig
 .ssh/
