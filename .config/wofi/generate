@@ -8,6 +8,9 @@ DESKTOP_SCRIPTS_LOCATION="$XDG_DATA_HOME/applications"
 
 generateScript(){
   name=$1
+  if [[ ! -d $DESKTOP_SCRIPTS_LOCATION ]]; then
+    mkdir -p $DESKTOP_SCRIPTS_LOCATION
+  fi
   cat << EOF > $DESKTOP_SCRIPTS_LOCATION/$name.desktop
 [Desktop Entry]
 Type=Application
