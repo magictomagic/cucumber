@@ -1,8 +1,23 @@
+## 主脉
+### 目标：
+1. 搭建自由操作系统，避免商业公司的干扰，通用
+2. 易用: 减少对命令行的依赖，用户通过启动器，输入需求，即可实现
+
+### 方法论
+1. 脚本/基础设施 先找现成的(可能是某个东西的一小部分) 找不到再自己写
+2. 最小化安装（只搞核心和必装的插件）
+3. 必须是自由软件(重点：协议开放),实在不行就用开源软件
+4. 尽量避免 QT （整个系统在5G以内），避免gtk2, 尽量用gtk3, 4
+5. 必须选择参与人多的，正在维护的，尽早弃用不维护的
+6. 尽量追求完美，但没必要100%的完美
+7. 做减法，减少快捷键记忆负担，用户手册由浅入深
+8. 去O(e.g. 禁用mysql)
+9. shell脚本编码规范，路径符合XDG标准，generate-os脚本生成的 Fedora/Debian 可直接做成ISO
 
 ## Route
 - [x] Extract/Share Linux-Desktop meta-data to cloud.
 - [ ] Meta-data can regenerate Full-Functional Linux-Desktop in Fedora/Debian with a little command line.
-- [ ] Auto generate script contain meta-data that can regenerate Full-Functional Linux-Desktop.
+- [ ] Auto generate script(generate-os) contain meta-data that can regenerate Full-Functional Linux-Desktop.
 - [ ] Automate backup $HOME and dd disk
 
 ## Extract Packages
@@ -154,3 +169,7 @@ AS
 Pycharm
 付费软件
 typora
+
+---
+
+底层的东西低代码, 图形化(若找不到现成的，或现成的不好用，Vue3自己搞(先设计(比如说点一下bar就出来wifi让你选,点一下电池就给你模式之类的（模仿windows）)))
